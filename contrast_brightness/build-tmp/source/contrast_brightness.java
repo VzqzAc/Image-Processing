@@ -21,16 +21,18 @@ int R_MASK = 255<<16;
 class Colors {
 	float new_red, new_green, new_blue;
 	int red, green, blue;
+
 	public Colors (int info) {
-		info *= -1;
+		//info *= -1;
+		//println(rand);
 		int r, g, b;
 		red = (info & R_MASK)>>16;
 		green = (info & G_MASK)>>8;
 		blue = info & B_MASK;
 
-		new_red = (red);
-		new_green = (green);
-		new_blue = (blue);
+		new_red = (red*rand);
+		new_green = (green*rand);
+		new_blue = (blue*rand);
 	}
 
 }
@@ -38,6 +40,7 @@ class Colors {
 Colors[] colors;
 PImage img;
 boolean floppy = true;
+float rand;
 int r,g,b;
 int[] pix;
 
@@ -45,7 +48,10 @@ public void setup() {
 	
 	img = loadImage("image_example.JPG");
 	colors = new Colors[img.width*img.height];
+	rand = random(1.1f, 2);
+	println(rand);
 	doResize();
+	image(img, 0, 0);
 	surface.setResizable(true);
 	//println(R_MASK + "    " + G_MASK + "    " + B_MASK);
 }
