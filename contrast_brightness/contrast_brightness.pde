@@ -1,38 +1,3 @@
-int B_MASK = 255;
-int G_MASK = 255<<8;
-int R_MASK = 255<<16;
-
-//String 
-
-class Colors {
-	float contrast_red, contrast_green, contrast_blue;
-	float brightness_red, brightness_green, brightness_blue;
-	int red, green, blue;
-
-	public Colors (int info) {
-		//int r, g, b;
-		red = (info & R_MASK)>>16;
-		green = (info & G_MASK)>>8;
-		blue = info & B_MASK;
-
-		contrast_red = contrastCalculation(red);
-		contrast_green = contrastCalculation(green);
-		contrast_blue = contrastCalculation(blue);
-
-		brightness_red = brightnessCalculator(red);
-		brightness_green = brightnessCalculator(green);
-		brightness_blue = brightnessCalculator(blue);
-	}
-
-	float contrastCalculation(int color_value) {
-		return color_value * contrast_rand;
-	}
-
-	float brightnessCalculator(int color_value) {
-		return color_value + brightness_rand;
-	}
-}
-
 Colors[] colors;
 PImage img;
 boolean floppy = true;
@@ -68,7 +33,7 @@ void doResize() {
 
 void change_contrast_or_brightness(String method) {
 	img.loadPixels();
-	for (int i = 0; i < img.pixels.length; i++) colors[i] = new Colors(img.pixels[i]);
+	for (int i = 0; i < img.pixels.length; i++) colors[i] = new Colors(img.pixels[i], contrast_rand, brightness_rand);
 	if(method.equals("contrast")) {
 		println("contrast");
 		for (int i = 0; i < img.pixels.length; i++) 
