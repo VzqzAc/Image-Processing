@@ -31,6 +31,9 @@ void draw() {
 	img = loadImage("image_example.JPG");
 	image(img, 0, 0);
 	change_contrast_or_brightness("threshold");
+	img = loadImage("image_example.JPG");
+	image(img, 0, 0);
+	change_contrast_or_brightness("gray_scale");
 	exit();
 }
 
@@ -66,6 +69,11 @@ void change_contrast_or_brightness(String method) {
 		println("threshold");
 		for (int i = 0; i < img.pixels.length; i++) 
 			img.pixels[i] = color(colors[i].threshold_red, colors[i].threshold_green, colors[i].threshold_blue);
+	}
+	else if (method.equals("gray_scale")) {
+		println("gray_scale");
+		for (int i = 0; i < img.pixels.length; i++) 
+			img.pixels[i] = color(colors[i].grayscale_red, colors[i].grayscale_green, colors[i].grayscale_blue);
 	}
 	img.updatePixels();
 	save("data/" + method + ".jpg");

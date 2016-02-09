@@ -8,6 +8,7 @@ class Colors {
 	float contrast_red, contrast_green, contrast_blue;
 	float brightness_red, brightness_green, brightness_blue;
 	float inversion_red, inversion_green, inversion_blue;
+	float grayscale_red, grayscale_green, grayscale_blue;
 	int threshold_red, threshold_green, threshold_blue;
 	int rgb_threshold;
 	int red, green, blue;
@@ -26,16 +27,16 @@ class Colors {
 		brightness_green = brightnessCalculator(green, brightness_rand);
 		brightness_blue = brightnessCalculator(blue, brightness_rand);
 
-		rgb_threshold = thresholdCalculator(red, green, blue);
+		threshold_red = threshold_green = threshold_blue = thresholdCalculator(red, green, blue);
 
-		threshold_red = threshold_green = threshold_blue = rgb_threshold;
+		grayscale_red = grayscale_green = grayscale_blue = grayscaleCalculator(red, green, blue);
 	}
 
-	float contrastCalculation(int color_value, float contrast_rand) {
+	public static float contrastCalculation(int color_value, float contrast_rand) {
 		return color_value * contrast_rand;
 	}
 
-	float brightnessCalculator(int color_value, float brightness_rand) {
+	public static float brightnessCalculator(int color_value, float brightness_rand) {
 		return color_value + brightness_rand;
 	}
 
@@ -53,7 +54,7 @@ class Colors {
 		inversion_blue = max_blue - blue; 
 	}
 
-	int thresholdCalculator(int red, int green, int blue) {
+	public int thresholdCalculator(int red, int green, int blue) {
 		int count = 0;
 		if(red < threshold) count++;
 		if(green < threshold) count++;
@@ -61,5 +62,9 @@ class Colors {
 
 		if(count >= 2) return 0;
 		else return 255;
+	}
+
+	public static float grayscaleCalculator(int red, int green, int blue) {
+		return (float)((0.2126 * red) + (.7152 * green) + (0.0722 * blue));
 	}
 }
