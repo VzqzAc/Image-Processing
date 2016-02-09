@@ -28,6 +28,9 @@ void draw() {
 	img = loadImage("image_example.JPG");
 	image(img, 0, 0);
 	change_contrast_or_brightness("inversion");
+	img = loadImage("image_example.JPG");
+	image(img, 0, 0);
+	change_contrast_or_brightness("threshold");
 	exit();
 }
 
@@ -58,6 +61,11 @@ void change_contrast_or_brightness(String method) {
 			colors[i].inversionCalculator(max_pixel);
 			img.pixels[i] = color(colors[i].inversion_red, colors[i].inversion_green, colors[i].inversion_blue);
 		}
+	}
+	else if (method.equals("threshold")) {
+		println("threshold");
+		for (int i = 0; i < img.pixels.length; i++) 
+			img.pixels[i] = color(colors[i].threshold_red, colors[i].threshold_green, colors[i].threshold_blue);
 	}
 	img.updatePixels();
 	save("data/" + method + ".jpg");

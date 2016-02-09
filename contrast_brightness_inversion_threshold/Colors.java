@@ -3,10 +3,13 @@ class Colors {
 	int B_MASK = 255;
 	int G_MASK = 255<<8;
 	int R_MASK = 255<<16;
+	int threshold = 127;
 
 	float contrast_red, contrast_green, contrast_blue;
 	float brightness_red, brightness_green, brightness_blue;
 	float inversion_red, inversion_green, inversion_blue;
+	int threshold_red, threshold_green, threshold_blue;
+	int rgb_threshold;
 	int red, green, blue;
 
 	public Colors (int info, float contrast_rand, float brightness_rand) {
@@ -22,6 +25,10 @@ class Colors {
 		brightness_red = brightnessCalculator(red, brightness_rand);
 		brightness_green = brightnessCalculator(green, brightness_rand);
 		brightness_blue = brightnessCalculator(blue, brightness_rand);
+
+		rgb_threshold = thresholdCalculator(red, green, blue);
+
+		threshold_red = threshold_green = threshold_blue = rgb_threshold;
 	}
 
 	float contrastCalculation(int color_value, float contrast_rand) {
@@ -44,5 +51,15 @@ class Colors {
 		inversion_red = max_red - red;
 		inversion_green = max_green - green;
 		inversion_blue = max_blue - blue; 
+	}
+
+	int thresholdCalculator(int red, int green, int blue) {
+		int count = 0;
+		if(red < threshold) count++;
+		if(green < threshold) count++;
+		if(blue < threshold) count++;
+
+		if(count >= 2) return 0;
+		else return 255;
 	}
 }
