@@ -3,7 +3,7 @@ class Colors {
 	int B_MASK = 255;
 	int G_MASK = 255<<8;
 	int R_MASK = 255<<16;
-	int threshold = 127;
+	//int threshold = 127;
 
 	float contrast_red, contrast_green, contrast_blue;
 	float brightness_red, brightness_green, brightness_blue;
@@ -27,7 +27,7 @@ class Colors {
 		brightness_green = brightnessCalculator(green, brightness_rand);
 		brightness_blue = brightnessCalculator(blue, brightness_rand);
 
-		threshold_red = threshold_green = threshold_blue = thresholdCalculator(red, green, blue);
+		//threshold_red = threshold_green = threshold_blue = thresholdCalculator(red, green, blue);
 
 		grayscale_red = grayscale_green = grayscale_blue = grayscaleCalculator(red, green, blue);
 	}
@@ -54,14 +54,14 @@ class Colors {
 		inversion_blue = max_blue - blue; 
 	}
 
-	public int thresholdCalculator(int red, int green, int blue) {
+	public void thresholdCalculator(int max_threshold, int min_threshold, int threshold) {
 		int count = 0;
-		if(red < threshold) count++;
-		if(green < threshold) count++;
-		if(blue < threshold) count++;
+		if(this.red < threshold) count++;
+		if(this.green < threshold) count++;
+		if(this.blue < threshold) count++;
 
-		if(count >= 2) return 0;
-		else return 255;
+		if(count >= 2) this.threshold_red = this.threshold_green = this.threshold_blue = max_threshold;
+		else this.threshold_red = this.threshold_green = this.threshold_blue = min_threshold;
 	}
 
 	public static float grayscaleCalculator(int red, int green, int blue) {

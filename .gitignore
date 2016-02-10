@@ -1,3 +1,1 @@
 contrast_brightness_inversion_threshold/build-tmp/*
-contrast_brightness_inversion_threshold/data/*
-!contrast_brightness_inversion_threshold/data/gray_scale.jpg
