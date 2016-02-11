@@ -11,7 +11,7 @@ void setup() {
 	img = loadImage("image_example.JPG");
 	colors = new Colors[img.width*img.height];
 	pix = new int[img.width * img.height];
-	contrast_rand = random(1.1, 2);
+	contrast_rand = random(0, 255);
 	brightness_rand = random(1, 100);
 	println(contrast_rand + "    " + brightness_rand);
 	doResize();

@@ -9,6 +9,7 @@ class Colors {
 	float brightness_red, brightness_green, brightness_blue;
 	float inversion_red, inversion_green, inversion_blue;
 	float grayscale_red, grayscale_green, grayscale_blue;
+	//float contrast_correction_factor;
 	int threshold_red, threshold_green, threshold_blue;
 	int rgb_threshold;
 	int red, green, blue;
@@ -33,7 +34,8 @@ class Colors {
 	}
 
 	public static float contrastCalculation(int color_value, float contrast_rand) {
-		return color_value * contrast_rand;
+		float contrast_correction_factor = (259 * (contrast_rand + 255)) / (255 * (259 - contrast_rand));
+		return contrast_correction_factor * (color_value - 128) + 128;
 	}
 
 	public static float brightnessCalculator(int color_value, float brightness_rand) {
